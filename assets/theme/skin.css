@@ -1,0 +1,325 @@
+/* 文档书：文章树、正文和本篇目录三栏分别承担导航、阅读和定位。 */
+:root {
+  --bg: #fff;
+  --surface: #fff;
+  --text: #243446;
+  --muted: #718093;
+  --line: #e1e7ed;
+  --accent: #386cd5;
+  --soft: #eef3fd;
+  --code: #f4f6f9;
+  --scrollbar: #c1cbd7;
+  --radius: 7px;
+  --docs-rail: #f8f9fb;
+}
+:root.dark {
+  --bg: #171b22;
+  --surface: #1c222b;
+  --text: #e1e6ef;
+  --muted: #9caabc;
+  --line: #323c49;
+  --accent: #91b6ff;
+  --soft: #26344c;
+  --code: #212b38;
+  --scrollbar: #4c5d73;
+  --docs-rail: #191f28;
+}
+.theme-gitbook .site-header {
+  background: var(--surface);
+}
+.theme-gitbook .header-inner {
+  max-width: 1560px;
+  min-height: 70px;
+  padding: 14px 30px;
+}
+.theme-gitbook .brand {
+  font-size: 21px;
+  font-weight: 650;
+}
+.theme-gitbook .theme-toggle,
+.theme-gitbook .search-toggle {
+  border-radius: 7px;
+  border-color: transparent;
+}
+.theme-gitbook .theme-toggle:hover,
+.theme-gitbook .search-toggle:hover {
+  background: var(--soft);
+}
+.gitbook-workspace {
+  max-width: 1500px;
+  width: calc(100% - 48px);
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.docs-workspace {
+  display: grid;
+  grid-template-columns: 224px minmax(0, 1fr) 214px;
+  gap: 36px;
+  min-height: calc(100vh - 165px);
+}
+/* 关闭首页文章后同时隐藏文章导航，并收回左侧栏占用的空间。 */
+.docs-workspace.docs-without-index {
+  grid-template-columns: minmax(0, 1fr) 214px;
+}
+.theme-archive .docs-workspace {
+  display: block;
+  max-width: 860px;
+  min-height: 0;
+  margin: auto;
+}
+.theme-gitbook .breadcrumbs {
+  margin: 22px 0 18px;
+}
+.docs-content {
+  padding: 34px 0 52px;
+  min-width: 0;
+}
+.docs-workspace > .reading-index {
+  padding: 32px 20px 36px 2px;
+  border-right: 1px solid var(--line);
+  height: 100%;
+  background: linear-gradient(90deg, transparent, var(--docs-rail));
+}
+.docs-workspace > .home-rail,
+.docs-workspace > .article-rail {
+  border-left: 1px solid var(--line);
+  padding: 36px 0 28px 24px;
+  gap: 30px;
+}
+.docs-workspace .home-sidebar {
+  font-size: 12px;
+}
+.docs-workspace .category-list a {
+  font-size: 12px;
+  padding: 6px 0;
+}
+.docs-workspace .sidebar-section h2 {
+  font-size: 11px;
+  letter-spacing: 0;
+  color: var(--muted);
+}
+.docs-workspace .sidebar-section + .sidebar-section {
+  margin-top: 24px;
+  padding-top: 20px;
+}
+.docs-welcome {
+  padding: 0 0 28px;
+  border-bottom: 1px solid var(--line);
+  margin-bottom: 26px;
+}
+.docs-welcome h1 {
+  font-size: 38px;
+  font-weight: 700;
+  letter-spacing: -0.04em;
+}
+.docs-welcome .intro-kicker {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+}
+.docs-welcome .intro-description {
+  font-size: 14px;
+}
+.docs-summary {
+  display: flex;
+  gap: 10px 20px;
+  flex-wrap: wrap;
+  color: var(--muted);
+  font-size: 11px;
+  margin-top: 20px;
+}
+.docs-summary > span::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  background: var(--accent);
+  display: inline-block;
+  margin-right: 7px;
+  border-radius: 50%;
+}
+.gitbook-workspace .theme-list-title {
+  color: var(--text);
+  font-size: 13px;
+  letter-spacing: 0;
+}
+.gitbook-workspace .theme-list-heading {
+  margin-bottom: 18px;
+}
+.gitbook-entries {
+  display: grid;
+  gap: 14px;
+}
+.gitbook-workspace .docs-chapter {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) 22px;
+  gap: 16px;
+  align-items: start;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  padding: 22px;
+  background: var(--surface);
+}
+.docs-chapter:hover {
+  border-color: var(--accent);
+  box-shadow: 0 4px 18px rgba(30, 71, 140, 0.045);
+}
+.chapter-marker {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 34px;
+  color: var(--accent);
+}
+.docs-chapter h2 {
+  font-size: 20px;
+  letter-spacing: 0;
+  margin: 0 0 8px;
+}
+.docs-chapter .card-summary {
+  font-size: 13px;
+  -webkit-line-clamp: 2;
+  margin-bottom: 13px;
+  line-height: 1.9;
+}
+.chapter-arrow {
+  color: var(--muted);
+  font-size: 21px;
+  align-self: center;
+}
+.docs-chapter .card-meta {
+  font-size: 11px;
+}
+.docs-reading {
+  min-height: 0;
+}
+.docs-reading .docs-content {
+  padding-top: 10px;
+}
+.docs-reading > .reading-index,
+.docs-reading > .article-rail {
+  padding-top: 12px;
+}
+.docs-reading .article-header {
+  padding-bottom: 24px;
+}
+.docs-reading .article-header h1 {
+  font-size: 38px;
+  font-weight: 700;
+}
+.docs-reading .prose {
+  font-size: 15px;
+  line-height: 1.95;
+}
+.docs-reading .prose h2 {
+  font-size: 25px;
+  border-top: 1px solid var(--line);
+  padding-top: 24px;
+  margin-top: 36px;
+}
+.docs-reading .prose h3 {
+  font-size: 20px;
+}
+.docs-reading .prose blockquote {
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  background: var(--soft);
+  padding: 14px 20px;
+  border-radius: 6px;
+}
+.gitbook-workspace .ad-copy {
+  padding: 14px;
+  font-size: 12px;
+}
+.gitbook-workspace .toc {
+  font-size: 12px;
+}
+.gitbook-workspace .toc > div {
+  font-size: 11px;
+  color: var(--muted);
+}
+.theme-gitbook .site-footer {
+  max-width: 1500px;
+  padding: 16px 0;
+}
+@media (max-width: 1160px) {
+  .docs-workspace {
+    grid-template-columns: 180px minmax(0, 1fr) 184px;
+    gap: 24px;
+  }
+  .docs-workspace > .home-rail,
+  .docs-workspace > .article-rail {
+    padding-left: 18px;
+  }
+  .docs-workspace > .reading-index {
+    padding-right: 14px;
+  }
+}
+@media (max-width: 980px) {
+  .docs-workspace.docs-without-index {
+    display: block;
+  }
+  .docs-workspace {
+    grid-template-columns: 170px minmax(0, 1fr);
+    gap: 24px;
+  }
+  .docs-workspace > .home-rail,
+  .docs-workspace > .article-rail {
+    grid-column: 2;
+    border: 0;
+    padding: 0 0 28px;
+    margin: 0;
+  }
+  .docs-workspace > .home-rail .home-sidebar {
+    display: none;
+  }
+  .docs-workspace .reading-index {
+    grid-row: 1/3;
+  }
+  .docs-workspace > .article-rail .ad-slot {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .docs-workspace {
+    min-height: 0;
+  }
+  .docs-content {
+    padding-bottom: 28px;
+  }
+}
+@media (max-width: 760px) {
+  .gitbook-workspace {
+    width: calc(100% - 36px);
+  }
+  .docs-workspace {
+    display: block;
+  }
+  .docs-content {
+    padding: 24px 0;
+  }
+  .docs-welcome h1 {
+    font-size: 32px;
+  }
+  .gitbook-workspace .docs-chapter {
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 12px;
+    padding: 18px 16px;
+  }
+  .chapter-arrow {
+    display: none;
+  }
+  .docs-chapter h2 {
+    font-size: 21px;
+  }
+  .docs-workspace > .home-rail,
+  .docs-workspace > .article-rail {
+    padding: 0 0 24px;
+  }
+  .docs-reading .article-header h1 {
+    font-size: 30px;
+  }
+  .docs-reading .prose h2 {
+    font-size: 23px;
+  }
+  .gitbook-workspace .article-rail {
+    margin: 0;
+  }
+}

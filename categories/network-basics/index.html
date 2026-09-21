@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="gitbook">
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>网络原理 · 便宜机场推荐</title>
+<meta name="description" content="解释代理网络中的延迟、带宽、DNS与连接路径，帮助读者看懂测试结果和性能差异。">
+<meta name="keywords" content="网络原理">
+<meta name="robots" content="index,follow,max-image-preview:large"><link rel="canonical" href="https://pyjichang.cc/categories/network-basics/">
+<meta property="og:title" content="网络原理">
+<meta property="og:description" content="解释代理网络中的延迟、带宽、DNS与连接路径，帮助读者看懂测试结果和性能差异。">
+<meta property="og:url" content="https://pyjichang.cc/categories/network-basics/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="便宜机场推荐">
+<meta property="og:locale" content="zh_CN">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络原理">
+<meta name="twitter:description" content="解释代理网络中的延迟、带宽、DNS与连接路径，帮助读者看懂测试结果和性能差异。">
+
+
+<script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@id":"https://pyjichang.cc/categories/network-basics/#collection","@type":"CollectionPage","description":"解释代理网络中的延迟、带宽、DNS与连接路径，帮助读者看懂测试结果和性能差异。","inLanguage":"zh-CN","mainEntity":{"@type":"ItemList","itemListElement":[{"@type":"ListItem","name":"同地区节点为何体验不同？看目标网站与实际网络路径","position":1,"url":"https://pyjichang.cc/posts/same-region-different-path/"},{"@type":"ListItem","name":"浏览器安全DNS会影响代理吗？分清三处解析设置再排查","position":2,"url":"https://pyjichang.cc/posts/browser-doh-proxy-layers/"},{"@type":"ListItem","name":"Mbps与MB/s怎么换算？下载耗时和套餐速率的计算方法","position":3,"url":"https://pyjichang.cc/posts/mbps-mbs-download-time/"},{"@type":"ListItem","name":"ping通了为什么网页仍打不开？ICMP与应用请求分开验证","position":4,"url":"https://pyjichang.cc/posts/ping-success-web-failure/"}]},"name":"网络原理","url":"https://pyjichang.cc/categories/network-basics/"},{"@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","item":"https://pyjichang.cc/","name":"便宜机场推荐","position":1},{"@type":"ListItem","item":"https://pyjichang.cc/categories/network-basics/","name":"网络原理","position":2}]}]}</script>
+
+<script>(()=>{let mode='system';try{const saved=localStorage.getItem('reader-theme');if(['system','light','dark'].includes(saved))mode=saved}catch{}const root=document.documentElement;root.dataset.colorMode=mode;root.classList.toggle('dark',mode==='dark'||(mode==='system'&&matchMedia('(prefers-color-scheme: dark)').matches))})();</script>
+<link rel="stylesheet" href="https://pyjichang.cc/assets/theme/style.css">
+<link rel="stylesheet" href="https://pyjichang.cc/assets/theme/advertisements.css">
+<link rel="stylesheet" href="https://pyjichang.cc/assets/theme/search.css"><script defer src="https://pyjichang.cc/assets/theme/search.js"></script>
+<link rel="stylesheet" href="https://pyjichang.cc/assets/theme/layouts.css"><link rel="stylesheet" href="https://pyjichang.cc/assets/theme/effects.css"><link rel="stylesheet" href="https://pyjichang.cc/assets/theme/skin.css">
+<link rel="stylesheet" href="https://pyjichang.cc/assets/theme/viewer.css">
+<link rel="stylesheet" href="https://pyjichang.cc/assets/theme/reader.css">
+<link rel="icon" href="https://pyjichang.cc/assets/theme/favicon.svg" type="image/svg+xml">
+
+<script defer src="https://pyjichang.cc/assets/theme/theme.js"></script>
+<script defer src="https://pyjichang.cc/assets/theme/reader.js"></script>
+<script defer src="https://pyjichang.cc/assets/theme/viewer.js"></script>
+<script defer src="https://pyjichang.cc/assets/theme/image-viewer.js"></script>
+
+<script defer src="https://pyjichang.cc/assets/theme/interactions.js"></script>
+
+
+
+</head>
+
+<body class="theme-gitbook">
+<a class="skip" href="#main">跳到正文</a>
+
+<header class="site-header">
+<div class="header-inner">
+<a class="brand" href="https://pyjichang.cc/"><span>便宜机场推荐</span></a>
+<nav id="site-navigation" aria-label="站点导航"><a href="https://pyjichang.cc/">首页</a><a href="https://pyjichang.cc/posts/budget-airport-recommendation/">机场推荐</a><a href="https://pyjichang.cc/categories/buying-budget/">选购与预算</a><a href="https://pyjichang.cc/categories/client-guides/">客户端上手</a><a href="https://pyjichang.cc/categories/network-basics/" aria-current="page">网络原理</a><a href="https://pyjichang.cc/categories/troubleshooting/">故障排查</a><a href="https://pyjichang.cc/categories/privacy-maintenance/">隐私与维护</a></nav>
+<a class="search-toggle" href="https://pyjichang.cc/search/" data-open-dialog="search-dialog" aria-haspopup="dialog" aria-controls="search-dialog" aria-label="搜索" title="搜索"><svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 4.5 4.5"/></svg></a>
+<button id="theme-mode" class="theme-toggle theme-cycle" type="button" aria-label="明暗模式：跟随系统，点击切换为明亮" title="跟随系统 · 点击切换为明亮">
+<svg class="theme-icon-system" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="2"/><path d="M8 21h8m-4-4v4"/></svg>
+<svg class="theme-icon-moon" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20.2 15.5A8.5 8.5 0 0 1 8.5 3.8 8.5 8.5 0 1 0 20.2 15.5Z"/></svg>
+<svg class="theme-icon-sun" viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M4.9 4.9l1.4 1.4m11.4 11.4 1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+</button>
+<span id="theme-mode-status" class="visually-hidden" role="status" aria-live="polite"></span>
+<button id="menu-toggle" class="menu-toggle" type="button" aria-controls="site-navigation" aria-expanded="false" aria-label="打开菜单" title="打开菜单">
+<svg class="menu-icon-open" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+<svg class="menu-icon-close" viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="m6 6 12 12M6 18 18 6"/></svg>
+</button>
+</div>
+</header>
+
+
+<main id="main" tabindex="-1" class="gitbook-workspace theme-workspace theme-archive">
+
+<nav class="breadcrumbs" aria-label="面包屑导航"><ol><li><a href="https://pyjichang.cc/">便宜机场推荐</a></li><li><span aria-current="page">网络原理</span></li></ol></nav>
+
+
+
+<div class="docs-workspace"><section class="docs-content content-column">
+<header class="archive-header"><h1>网络原理</h1><p>解释代理网络中的延迟、带宽、DNS与连接路径，帮助读者看懂测试结果和性能差异。</p></header>
+
+
+
+<div class="theme-list-heading">
+<span class="theme-list-title">阅读章节</span>
+<span class="theme-list-count">本页 4 篇</span>
+</div>
+<section class="article-list gitbook-entries" aria-label="文章列表"><article class="article-card docs-chapter">
+<span class="chapter-marker" aria-hidden="true">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4">
+<path d="M5 3h10l4 4v14H5Z"/>
+<path d="M14 3v5h5M9 12h6m-6 4h6"/>
+</svg>
+</span>
+<div>
+<h2>
+<a href="https://pyjichang.cc/posts/same-region-different-path/">同地区节点为何体验不同？看目标网站与实际网络路径</a></h2>
+<p class="card-summary">节点地区名称不能独立预测体验。固定目标任务，比较首屏等待、完整耗时和失败次数，区分路径差异与偶然波动。</p>
+<div class="card-meta">
+<span>王牌飞行员</span>
+<time datetime="2026-09-21T15:52:13&#43;08:00">2026-09-21</time>
+</div>
+</div>
+<a class="chapter-arrow" href="https://pyjichang.cc/posts/same-region-different-path/" aria-label="阅读同地区节点为何体验不同？看目标网站与实际网络路径">→</a>
+</article><article class="article-card docs-chapter">
+<span class="chapter-marker" aria-hidden="true">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4">
+<path d="M5 3h10l4 4v14H5Z"/>
+<path d="M14 3v5h5M9 12h6m-6 4h6"/>
+</svg>
+</span>
+<div>
+<h2>
+<a href="https://pyjichang.cc/posts/browser-doh-proxy-layers/">浏览器安全DNS会影响代理吗？分清三处解析设置再排查</a></h2>
+<p class="card-summary">系统、浏览器和代理客户端可能各有解析设置。通过Firefox安全DNS状态和固定请求，检查解析失败发生在哪一层。</p>
+<div class="card-meta">
+<span>王牌飞行员</span>
+<time datetime="2026-09-21T15:52:06&#43;08:00">2026-09-21</time>
+</div>
+</div>
+<a class="chapter-arrow" href="https://pyjichang.cc/posts/browser-doh-proxy-layers/" aria-label="阅读浏览器安全DNS会影响代理吗？分清三处解析设置再排查">→</a>
+</article><article class="article-card docs-chapter">
+<span class="chapter-marker" aria-hidden="true">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4">
+<path d="M5 3h10l4 4v14H5Z"/>
+<path d="M14 3v5h5M9 12h6m-6 4h6"/>
+</svg>
+</span>
+<div>
+<h2>
+<a href="https://pyjichang.cc/posts/mbps-mbs-download-time/">Mbps与MB/s怎么换算？下载耗时和套餐速率的计算方法</a></h2>
+<p class="card-summary">把套餐速率和下载软件显示的速度统一单位，再估算文件耗时；区分理论上限、实际吞吐与流量消耗，避免按峰值误选套餐。</p>
+<div class="card-meta">
+<span>王牌飞行员</span>
+<time datetime="2026-09-21T15:51:58&#43;08:00">2026-09-21</time>
+</div>
+</div>
+<a class="chapter-arrow" href="https://pyjichang.cc/posts/mbps-mbs-download-time/" aria-label="阅读Mbps与MB/s怎么换算？下载耗时和套餐速率的计算方法">→</a>
+</article><article class="article-card docs-chapter">
+<span class="chapter-marker" aria-hidden="true">
+<svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="1.4">
+<path d="M5 3h10l4 4v14H5Z"/>
+<path d="M14 3v5h5M9 12h6m-6 4h6"/>
+</svg>
+</span>
+<div>
+<h2>
+<a href="https://pyjichang.cc/posts/ping-success-web-failure/">ping通了为什么网页仍打不开？ICMP与应用请求分开验证</a></h2>
+<p class="card-summary">ping结果只反映特定的IP层探测，不能代替网页请求。按域名、连接、TLS与HTTP响应分层记录，定位真正失败的步骤。</p>
+<div class="card-meta">
+<span>王牌飞行员</span>
+<time datetime="2026-09-21T15:50:08&#43;08:00">2026-09-21</time>
+</div>
+</div>
+<a class="chapter-arrow" href="https://pyjichang.cc/posts/ping-success-web-failure/" aria-label="阅读ping通了为什么网页仍打不开？ICMP与应用请求分开验证">→</a>
+</article></section>
+
+
+</section></div>
+
+</main>
+
+
+<footer class="site-footer">
+
+
+</footer>
+
+
+
+<dialog id="search-dialog" class="reader-dialog site-search" aria-labelledby="search-title" data-reader-dialog data-pagefind-ignore>
+<header class="reader-dialog-header"><h2 id="search-title">搜索文章</h2><button class="dialog-close" type="button" data-close-dialog aria-label="关闭搜索" title="关闭搜索">×</button></header>
+<div class="reader-dialog-body">
+
+<div id="site-search-ui" data-module="https://pyjichang.cc/pagefind/pagefind-component-ui.js" data-stylesheet="https://pyjichang.cc/pagefind/pagefind-component-ui.css" hidden>
+
+<pagefind-config bundle-path="https://pyjichang.cc/pagefind/" base-url="https://pyjichang.cc/" lang="zh-cn" no-worker></pagefind-config>
+<pagefind-input placeholder="搜索文章标题或正文"></pagefind-input>
+<pagefind-summary></pagefind-summary>
+<pagefind-results></pagefind-results>
+</div>
+<p id="search-status" class="search-status" role="status">正在加载搜索…</p>
+<button id="search-retry" class="button" type="button" hidden>重新加载</button>
+
+</div>
+</dialog>
+
+
+
+</body>
+</html>
