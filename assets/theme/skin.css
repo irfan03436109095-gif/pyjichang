@@ -1,4 +1,4 @@
-/* 文档书：文章树、正文和本篇目录三栏分别承担导航、阅读和定位。 */
+/* 文档精选：沿用文档布局，增加图文推荐和置顶全文。 */
 :root {
   --bg: #fff;
   --surface: #fff;
@@ -322,4 +322,73 @@
   .gitbook-workspace .article-rail {
     margin: 0;
   }
+}
+
+/* 推荐数据只来自首页侧边广告位；没有条目时模板不输出空栏。 */
+.featured-recommendations {
+  min-width: 0;
+  align-self: start;
+  padding: 32px 20px 36px 2px;
+  border-right: 1px solid var(--line);
+  background: linear-gradient(90deg, transparent, var(--docs-rail));
+}
+.featured-recommendations .index-heading { font-size: 13px; margin-top: 0; }
+.featured-recommendations .ad-slot { margin: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 18px; }
+.featured-recommendations .ad-card { border-radius: 8px; background: var(--surface); }
+.featured-recommendations .ad-image { display: block; width: 100%; height: auto; max-height: none; object-fit: contain; }
+.featured-recommendations .ad-copy { overflow-wrap: anywhere; padding: 14px; line-height: 1.8; }
+.featured-recommendations .ad-copy > :first-child { margin-top: 0; }
+.featured-recommendations .ad-copy > :last-child { margin-bottom: 0; }
+.home-feature {
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--accent);
+  border-radius: 8px;
+  padding: 26px;
+  background: var(--surface);
+}
+.feature-header { padding-bottom: 22px; margin-bottom: 24px; border-bottom: 1px solid var(--line); }
+.feature-eyebrow { color: var(--accent); font-size: 11px; letter-spacing: .08em; margin-bottom: 12px; }
+.feature-header h2 { font-size: 25px; line-height: 1.5; margin: 0 0 14px; overflow-wrap: anywhere; }
+.feature-header h2 a { color: var(--text); }
+.feature-header h2 a:hover { color: var(--accent); }
+.feature-header .card-meta { font-size: 11px; }
+.home-feature-body { font-size: 15px; line-height: 1.95; overflow-wrap: anywhere; white-space: pre-wrap; }
+.home-feature-body.is-rendered { white-space: normal; }
+.home-feature-body > :first-child { margin-top: 0; }
+.home-feature-body h3 { font-size: 21px; margin-top: 32px; padding-top: 22px; border-top: 1px solid var(--line); }
+.home-feature-body h4 { font-size: 18px; }
+.home-feature-body img { display: block; max-width: 100%; height: auto; border-radius: 7px; margin: 20px auto; }
+.home-feature-body figure { margin: 24px 0; }
+.home-feature-body figcaption { font-size: 12px; color: var(--muted); text-align: center; }
+.home-feature-body pre { overflow-x: auto; max-width: 100%; }
+.home-feature-body table { display: block; max-width: 100%; overflow-x: auto; }
+.home-feature-body blockquote { margin-inline: 0; background: var(--soft); padding: 12px 18px; border-left: 3px solid var(--accent); border-radius: 5px; }
+.feature-footer { border-top: 1px solid var(--line); margin-top: 26px; padding-top: 18px; font-size: 13px; }
+.feature-image-fallback { display: block; padding: 12px; border: 1px dashed var(--line); }
+@media (max-width: 1160px) {
+  .featured-recommendations { padding-right: 14px; }
+  .home-feature { padding: 22px; }
+}
+@media (min-width: 761px) {
+  .docs-home > .docs-content { grid-column: 2; grid-row: 1; }
+  .docs-home > .featured-recommendations { grid-column: 1; grid-row: 1 / 3; }
+  .docs-home.docs-without-index > .docs-content { grid-column: 1; }
+  .docs-home.docs-without-index > .home-rail { grid-column: 2; }
+}
+@media (max-width: 980px) and (min-width: 761px) {
+  .docs-home.docs-without-index { display: block; }
+}
+@media (max-width: 760px) {
+  .docs-home { display: flex; flex-direction: column; }
+  .docs-home > .docs-content { order: 1; width: 100%; }
+  .featured-recommendations { order: 2; width: 100%; border-right: 0; border-top: 1px solid var(--line); padding: 24px 0; background: none; }
+  .docs-home > .home-rail { order: 3; }
+  .featured-recommendations .ad-slot { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+  .home-feature { padding: 20px 16px; }
+  .feature-header h2 { font-size: 23px; }
+  .home-feature-body { font-size: 15px; }
+}
+@media (max-width: 480px) {
+  .featured-recommendations .ad-slot { grid-template-columns: minmax(0, 1fr); }
 }
