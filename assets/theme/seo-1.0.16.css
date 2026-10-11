@@ -1,0 +1,3 @@
+.chapter-cover{aspect-ratio:3/2;overflow:hidden}
+.chapter-cover img{height:100%;object-fit:contain}
+.card-summary{overflow-wrap:anywhere}
