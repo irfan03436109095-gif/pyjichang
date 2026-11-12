@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://www.pyjichang.cc/</loc>
-    <lastmod>2026-11-12T08:13:31Z</lastmod>
+    <lastmod>2026-11-12T09:02:37Z</lastmod>
   </url>
   <url>
     <loc>https://www.pyjichang.cc/categories/buying-budget/</loc>
-    <lastmod>2026-11-12T08:13:31Z</lastmod>
+    <lastmod>2026-11-12T09:02:37Z</lastmod>
   </url>
   <url>
     <loc>https://www.pyjichang.cc/categories/buying-budget/page/2/</loc>
@@ -110,7 +110,7 @@
   </url>
   <url>
     <loc>https://www.pyjichang.cc/posts/airport-subscription-beginner-illustrated-2026/</loc>
-    <lastmod>2026-11-12T08:13:31Z</lastmod>
+    <lastmod>2026-11-12T09:02:37Z</lastmod>
   </url>
   <url>
     <loc>https://www.pyjichang.cc/posts/android-data-warning-vs-plan-quota/</loc>
@@ -170,7 +170,7 @@
   </url>
   <url>
     <loc>https://www.pyjichang.cc/posts/first-term-discount-renewal-cost/</loc>
-    <lastmod>2026-11-12T08:13:31Z</lastmod>
+    <lastmod>2026-11-12T09:02:37Z</lastmod>
   </url>
   <url>
     <loc>https://www.pyjichang.cc/posts/flybit-99ba-first-month-budget-comparison/</loc>
@@ -231,6 +231,10 @@
   <url>
     <loc>https://www.pyjichang.cc/posts/mbps-mbs-download-time/</loc>
     <lastmod>2026-10-31T08:05:00Z</lastmod>
+  </url>
+  <url>
+    <loc>https://www.pyjichang.cc/posts/microsoft-store-pause-updates-budget/</loc>
+    <lastmod>2026-11-12T08:50:03Z</lastmod>
   </url>
   <url>
     <loc>https://www.pyjichang.cc/posts/monthly-or-usage-cost/</loc>
@@ -329,10 +333,6 @@
     <lastmod>2026-10-31T08:05:00Z</lastmod>
   </url>
   <url>
-    <loc>https://www.pyjichang.cc/posts/windows-metered-network-proxy-quota/</loc>
-    <lastmod>2026-11-12T08:13:24Z</lastmod>
-  </url>
-  <url>
     <loc>https://www.pyjichang.cc/posts/windows-pac-manual-proxy/</loc>
     <lastmod>2026-10-31T08:05:00Z</lastmod>
   </url>
@@ -354,7 +354,7 @@
   </url>
   <url>
     <loc>https://www.pyjichang.cc/tags/budget-planning/</loc>
-    <lastmod>2026-11-12T08:13:31Z</lastmod>
+    <lastmod>2026-11-12T09:02:37Z</lastmod>
   </url>
   <url>
     <loc>https://www.pyjichang.cc/tags/budget-planning/page/2/</loc>
@@ -434,7 +434,7 @@
   </url>
   <url>
     <loc>https://www.pyjichang.cc/tags/traffic-management/</loc>
-    <lastmod>2026-11-12T08:13:31Z</lastmod>
+    <lastmod>2026-11-12T09:02:37Z</lastmod>
   </url>
   <url>
     <loc>https://www.pyjichang.cc/tags/traffic-management/page/2/</loc>
@@ -458,6 +458,6 @@
   </url>
   <url>
     <loc>https://www.pyjichang.cc/tags/windows/</loc>
-    <lastmod>2026-11-12T08:13:31Z</lastmod>
+    <lastmod>2026-11-12T09:02:37Z</lastmod>
   </url>
 </urlset>
